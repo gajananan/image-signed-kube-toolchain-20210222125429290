@@ -411,7 +411,7 @@ spec:
           value: $(params.vault-name)
         - name: pipeline-debug
           value: $(params.pipeline-debug)
-    - name: deploy-to-kubernetes
+    - name: artifact-signing-deploy-to-kubernetes
       taskRef:
         name: artifact-sign-iks-deploy-to-kubernetes
       runAfter: [build-sign, validation-sign]
@@ -464,18 +464,18 @@ spec:
         - name: artifacts
           workspace: pipeline-ws
     - name: publish-deployable-task
-      runAfter: [deploy-to-kubernetes]
+      runAfter: [artifact-signing-deploy-to-kubernetes]
       taskRef:
         name: toolchain-publish-deployable-mapping
       params:
         - name: deployable-type
           value: "kubernetes_cluster"
         - name: deployable-region-id
-          value: $(tasks.deploy-to-kubernetes.results.region)
+          value: $(tasks.artifact-signing-deploy-to-kubernetes.results.region)
         - name: deployable-guid
-          value: $(tasks.deploy-to-kubernetes.results.cluster-id)
+          value: $(tasks.artifact-signing-deploy-to-kubernetes.results.cluster-id)
         - name: deployable-rg-id
-          value: $(tasks.deploy-to-kubernetes.results.resource-group-id)
+          value: $(tasks.artifact-signing-deploy-to-kubernetes.results.resource-group-id)
         - name: environment-label
           value: "$(params.cluster-name) namespace:$(params.cluster-namespace)"
         - name: git-inputs
@@ -485,7 +485,7 @@ spec:
     - name: check-health
       taskRef:
         name: artifact-sign-iks-deploy-to-kubernetes
-      runAfter: [deploy-to-kubernetes]
+      runAfter: [artifact-signing-deploy-to-kubernetes]
       params:
         - name: shuttle-properties-file
           value: "build.properties"
