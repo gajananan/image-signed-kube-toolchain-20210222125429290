@@ -484,7 +484,7 @@ spec:
           value: $(params.pipeline-debug)
     - name: check-health
       taskRef:
-        name: iks-deploy-to-kubernetes
+        name: artifact-sign-iks-deploy-to-kubernetes
       runAfter: [deploy-to-kubernetes]
       params:
         - name: shuttle-properties-file
