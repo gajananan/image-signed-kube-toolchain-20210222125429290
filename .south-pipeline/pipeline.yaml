@@ -389,28 +389,28 @@ spec:
       workspaces:
         - name: artifacts
           workspace: pipeline-ws
-    - name: validation-sign
-      runAfter:
-        - vulnerability-advisor
-      taskRef:
-        name: signing-dct-sign
-      params:
-        - name: image-repository
-          value: $(tasks.containerize.results.image-repository)
-        - name: image-digest
-          value: $(tasks.containerize.results.image-digest)
-        - name: image-tags
-          value: $(tasks.containerize.results.image-tags)
-        - name: signer
-          value: $(params.validation-signer)
-        - name: vault-region
-          value: $(params.vault-region)
-        - name: vault-resource-group
-          value: $(params.vault-resource-group)
-        - name: vault-name
-          value: $(params.vault-name)
-        - name: pipeline-debug
-          value: $(params.pipeline-debug)
+    #- name: validation-sign
+      #runAfter:
+        #- vulnerability-advisor
+      #taskRef:
+        #name: signing-dct-sign
+      #params:
+      #  - name: image-repository
+      #    value: $(tasks.containerize.results.image-repository)
+      #  - name: image-digest
+      #    value: $(tasks.containerize.results.image-digest)
+      #  - name: image-tags
+      #    value: $(tasks.containerize.results.image-tags)
+      #  - name: signer
+      #    value: $(params.validation-signer)
+      #  - name: vault-region
+      #    value: $(params.vault-region)
+      #  - name: vault-resource-group
+      #    value: $(params.vault-resource-group)
+      #  - name: vault-name
+      #    value: $(params.vault-name)
+      #  - name: pipeline-debug
+      #    value: $(params.pipeline-debug)
     - name: artifact-signing-deploy-to-kubernetes
       taskRef:
         name: artifact-sign-iks-deploy-to-kubernetes
