@@ -414,7 +414,7 @@ spec:
     - name: artifact-signing-deploy-to-kubernetes
       taskRef:
         name: artifact-sign-iks-deploy-to-kubernetes
-      runAfter: [build-sign, validation-sign]
+      runAfter: [build-sign]
       params:
         - name: shuttle-properties-file
           value: "build.properties"
